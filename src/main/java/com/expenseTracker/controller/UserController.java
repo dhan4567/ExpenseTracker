@@ -17,28 +17,28 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public UserResponseDto createUser(@RequestMapping UserRequestDto dto) {
-        return userService.createFamily(dto);
+    public UserResponseDto createUser(@RequestBody UserRequestDto dto) {
+        return userService.createUser(dto);
     }
 
     @GetMapping
     public List<UserResponseDto> getAllUsers() {
-        return userService.getAllFamilies();
+        return userService.getAllUsers();
     }
 
     @GetMapping
     public UserResponseDto getUserById( Long userId) {
-        return userService.getFamilyById(userId);
+        return userService.getUserById(userId);
     }
 
     @PutMapping
     public UserResponseDto updateUserById( Long userId, UserRequestDto dto) {
-        return userService.updateFamilyById(userId, dto);
+        return userService.updateUserById(userId, dto);
 }
 
     @DeleteMapping
     public String deleteUser( Long userId) {
-        userService.deleteFamily(userId);
+        userService.deleteUser(userId);
         return "user deleted successfully";
     }
 }

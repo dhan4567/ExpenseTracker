@@ -17,7 +17,7 @@ public class UserService implements UserServiceImp {
     private UserRepository userRepository;
 
     @Override
-    public UserResponseDto createFamily(UserRequestDto dto) {
+    public UserResponseDto createUser(UserRequestDto dto) {
         User user= new User();
         user.setUserName(dto.getUserName());
         user.setEmail(dto.getEmail());
@@ -28,7 +28,7 @@ public class UserService implements UserServiceImp {
     }
 
     @Override
-    public List<UserResponseDto> getAllFamilies() {
+    public List<UserResponseDto> getAllUsers() {
         return userRepository.findAll()
                 .stream()
                 .map(this::ConvertToResponseDto)
@@ -36,14 +36,14 @@ public class UserService implements UserServiceImp {
     }
 
     @Override
-    public UserResponseDto getFamilyById(Long userId) {
+    public UserResponseDto getUserById(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(()-> new NoSuchElementException("user not found" +userId));
         return ConvertToResponseDto(user);
     }
 
     @Override
-    public UserResponseDto updateFamilyById(Long userId, UserRequestDto dto) {
+    public UserResponseDto updateUserById(Long userId, UserRequestDto dto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(()-> new NoSuchElementException("user not found" +userId));
         user.setUserName(dto.getUserName());
@@ -55,7 +55,7 @@ public class UserService implements UserServiceImp {
     }
 
     @Override
-    public void deleteFamily(Long userId) {
+    public void deleteUser(Long userId) {
         if(!userRepository.existsById(userId)){
             throw new NoSuchElementException("user not found" +userId);
         }
@@ -63,15 +63,13 @@ public class UserService implements UserServiceImp {
 
 
     }
-    private UserResponseDto ConvertToResponseDto(User savedFamily) {
+    private UserResponseDto ConvertToResponseDto(User savedUser) {
         UserResponseDto responseDto = new UserResponseDto();
-        responseDto.setUserId(savedFamily.getUserId());
-        responseDto.setUserName(savedFamily.getUserName());
-        responseDto.setEmail(savedFamily.getEmail());
-        responseDto.setMobNo(savedFamily.getMobNo());
-        responseDto.setRole(savedFamily.getRole());
+        responseDto.setUserId(savedUser.getUserId());
+        responseDto.setUserName(savedUser.getUserName());
+        responseDto.setEmail(savedUser.getEmail());
+        responseDto.setMobNo(savedUser.getMobNo());
+        responseDto.setRole(savedUser.getRole());
         return responseDto;
     }
-
-
 }

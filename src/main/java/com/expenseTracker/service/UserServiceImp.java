@@ -10,14 +10,14 @@ import java.util.List;
 
 public interface UserServiceImp {
 
-    UserResponseDto createFamily(UserRequestDto dto);
+    UserResponseDto createUser(UserRequestDto dto);
 
-    List<UserResponseDto> getAllFamilies();
+    List<UserResponseDto> getAllUsers();
 
-    UserResponseDto getFamilyById(Long userId);
+    UserResponseDto getUserById(Long userId);
 
-    UserResponseDto updateFamilyById(Long userId,UserRequestDto dto);
+    UserResponseDto updateUserById(Long userId,UserRequestDto dto);
 
-    void deleteFamily(Long userId);
+    void deleteUser(Long userId);
 
 }
