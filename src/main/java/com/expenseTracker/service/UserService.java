@@ -5,12 +5,14 @@ import com.expenseTracker.dto.UserResponseDto;
 import com.expenseTracker.entity.User;
 import com.expenseTracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+@Service
 public class UserService implements UserServiceImp {
 
     @Autowired

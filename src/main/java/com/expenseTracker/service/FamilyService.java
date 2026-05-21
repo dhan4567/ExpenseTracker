@@ -7,11 +7,13 @@ import com.expenseTracker.entity.Family;
 import com.expenseTracker.entity.User;
 import com.expenseTracker.repository.FamilyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+@Service
 public class FamilyService implements FamilyServiceImp {
 
     @Autowired

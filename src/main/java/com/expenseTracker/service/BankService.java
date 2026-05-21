@@ -5,11 +5,13 @@ import com.expenseTracker.dto.BankResponseDto;
 import com.expenseTracker.entity.Bank;
 import com.expenseTracker.repository.BankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+@Service
 public class BankService implements BankServiceImp {
 
     @Autowired
