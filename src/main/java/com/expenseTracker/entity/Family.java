@@ -21,15 +21,12 @@ public class Family {
     @Column(length = 500)
     private String description;  // Optional: family description
 
+    @ManyToOne
+    @JoinColumn(name="userId",nullable = false)
+    private User user;
+
     @OneToMany(mappedBy = "family", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<User> members;  // Family members
 
-    // Constructors
-    public Family() {}
-
-    public Family(String familyName, String description) {
-        this.familyName = familyName;
-        this.description = description;
-    }
 
 }

@@ -18,24 +18,15 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private Number mobNo;
+    @Column(nullable = false,length=10)
+    private Long mobNo;
 
     @Column(nullable = false, length = 50)
     private String role;
 
     @ManyToOne
-    @JoinColumn(name = "family_id", nullable = false)
+    @JoinColumn(name = "family_id")
     private Family family;
 
-    //Constructors
-    public User(){}
 
-    public User(String userName, String email, Number mobNo, String role, Family family) {
-        this.userName = userName;
-        this.email = email;
-        this.mobNo = mobNo;
-        this.role = role;
-        this.family = family;
-    }
 }

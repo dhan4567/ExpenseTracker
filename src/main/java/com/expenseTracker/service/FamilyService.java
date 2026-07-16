@@ -3,9 +3,11 @@ package com.expenseTracker.service;
 import com.expenseTracker.dto.FamilyRequestDto;
 import com.expenseTracker.dto.FamilyResponseDto;
 import com.expenseTracker.dto.UserRequestDto;
+import com.expenseTracker.dto.UserResponseDto;
 import com.expenseTracker.entity.Family;
 import com.expenseTracker.entity.User;
 import com.expenseTracker.repository.FamilyRepository;
+import com.expenseTracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +18,27 @@ import java.util.stream.Collectors;
 @Service
 public class FamilyService implements FamilyServiceImp {
 
+    private final FamilyRepository familyRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    private FamilyRepository familyRepository;
+    public FamilyService(FamilyRepository familyRepository, UserRepository userRepository) {
+        this.familyRepository = familyRepository;
+        this.userRepository = userRepository;
+    }
+
 
     @Override
     public FamilyResponseDto createFamily(FamilyRequestDto dto) {
+
+        // Check if user exists, if not create a new user
+        User user = userRepository.findById(dto.getUserId())
+                .orElseThrow(() -> new NoSuchElementException("User not found with ID: " + dto.getUserId()));
+
         Family family = new Family();
         family.setFamilyName(dto.getFamilyName());
         family.setDescription(dto.getDescription());
+        family.setUser(user); // Set the owner/creator of the family
         Family savedFamily = familyRepository.save(family);
         return convertToResponseDto(savedFamily);
     }
@@ -62,10 +77,14 @@ public class FamilyService implements FamilyServiceImp {
     }
     //HELPER METHOD TO CONVERT ENTITY TO DTO
     private FamilyResponseDto convertToResponseDto(Family family) {
-        List<UserRequestDto> memberDtos = (family.getMembers() == null) ?
+        // Convert family owner/creator user
+
+
+        // Convert family members
+        List<UserResponseDto> memberDtos = (family.getMembers() == null) ?
                 List.of() :
                 family.getMembers().stream()
-                        .map(this::convertUserToDto)
+                        .map(this::convertUserToResponseDto)
                         .collect(Collectors.toList());
 
         return new FamilyResponseDto(
@@ -77,14 +96,13 @@ public class FamilyService implements FamilyServiceImp {
     }
 
     //HELPER METHOD TO CONVERT USER ENTITY TO USER DTO
-    private UserRequestDto convertUserToDto(User user) {
-        return new UserRequestDto(
-
+    private UserResponseDto convertUserToResponseDto(User user) {
+        return new UserResponseDto(
+                user.getUserId(),
                 user.getUserName(),
                 user.getEmail(),
                 user.getMobNo(),
                 user.getRole()
-
         );
     }
 }

@@ -8,12 +8,5 @@ import lombok.Setter;
 public class ExpenseRequestDto {
     private String category;
 
-    // Constructor
-    public ExpenseRequestDto() {
-    }
-
-    public ExpenseRequestDto(String category) {
-        this.category = category;
-    }
 }
 

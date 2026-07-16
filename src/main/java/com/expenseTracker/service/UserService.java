@@ -3,6 +3,7 @@ package com.expenseTracker.service;
 import com.expenseTracker.dto.UserRequestDto;
 import com.expenseTracker.dto.UserResponseDto;
 import com.expenseTracker.entity.User;
+import com.expenseTracker.repository.FamilyRepository;
 import com.expenseTracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class UserService implements UserServiceImp {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private FamilyRepository familyRepository;
+
     @Override
     public UserResponseDto createUser(UserRequestDto dto) {
         User user= new User();
@@ -25,6 +29,7 @@ public class UserService implements UserServiceImp {
         user.setEmail(dto.getEmail());
         user.setMobNo(dto.getMobNo());
         user.setRole(dto.getRole());
+
         User savedFamily=userRepository.save(user);
         return ConvertToResponseDto(savedFamily);
     }
@@ -72,6 +77,7 @@ public class UserService implements UserServiceImp {
         responseDto.setEmail(savedUser.getEmail());
         responseDto.setMobNo(savedUser.getMobNo());
         responseDto.setRole(savedUser.getRole());
+
         return responseDto;
     }
 }

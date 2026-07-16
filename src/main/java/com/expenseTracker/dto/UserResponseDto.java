@@ -13,21 +13,21 @@ public class UserResponseDto {
     private Long userId;
     private String userName;
     private String email;
-    private Number mobNo;
+    private Long mobNo;
     private String role;
-    private List<User> users;
+
 
     //constructor
     public UserResponseDto() {
     }
 
-    public UserResponseDto(Long userId, String userName, String email, Number mobNo, String role,List<User> users) {
+    public UserResponseDto(Long userId, String userName, String email, Long mobNo, String role) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.mobNo = mobNo;
         this.role = role;
-        this.users=users;
+
     }
 }
 

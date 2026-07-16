@@ -10,14 +10,5 @@ public class ExpenseResponseDto {
     private int expenseId;
     private String category;
     private List<ExpenseResponseDto> expenses;
-
-    // Constructor
-    public ExpenseResponseDto() {
-    }
-
-    public ExpenseResponseDto(int expenseId, String category) {
-        this.expenseId = expenseId;
-        this.category = category;
-    }
 }
 

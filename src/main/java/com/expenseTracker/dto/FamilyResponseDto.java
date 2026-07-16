@@ -10,13 +10,13 @@ public class FamilyResponseDto {
     private Long family_id;
     private String familyName;
     private String description;
-    private List<UserRequestDto> members;
+    private List<UserResponseDto> members;
 
     //Constructor
     public FamilyResponseDto() {
     }
 
-    public FamilyResponseDto(Long family_id, String familyName, String description, List<UserRequestDto> members){
+    public FamilyResponseDto(Long family_id, String familyName, String description, List<UserResponseDto> members){
         this.family_id=family_id;
         this.familyName=familyName;
         this.description=description;

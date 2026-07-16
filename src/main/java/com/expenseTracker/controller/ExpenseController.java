@@ -1,6 +1,5 @@
 package com.expenseTracker.controller;
 
-
 import com.expenseTracker.dto.ExpenseRequestDto;
 import com.expenseTracker.dto.ExpenseResponseDto;
 import com.expenseTracker.service.ExpenseService;
@@ -20,23 +19,19 @@ public class ExpenseController {
     public ExpenseResponseDto createExpense(@RequestBody ExpenseRequestDto dto) {
         return expenseService.createExpense(dto);
     }
-
     @GetMapping
     public List<ExpenseResponseDto> getAllExpenses() {
         return expenseService.getAllExpenses();
     }
-
     @GetMapping("/{expenseId}")
     public ExpenseResponseDto getExpenseById(@PathVariable int expenseId) {
         return expenseService.getExpenseById(expenseId);
     }
-
-    @PutMapping("/{expenseId}")
+@PutMapping("/{expenseId}")
     public ExpenseResponseDto updateExpenseById(@PathVariable int expenseId,
                                                 @RequestBody ExpenseRequestDto dto) {
         return expenseService.updateExpenseById(expenseId, dto);
     }
-
     @DeleteMapping("/{expenseId}")
     public String deleteExpense(@PathVariable int expenseId) {
         expenseService.deleteExpense(expenseId);

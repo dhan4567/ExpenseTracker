@@ -26,18 +26,18 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping
-    public UserResponseDto getUserById( Long userId) {
+    @GetMapping("/{userId}")
+    public UserResponseDto getUserById(@PathVariable Long userId) {
         return userService.getUserById(userId);
     }
 
-    @PutMapping
-    public UserResponseDto updateUserById( Long userId, UserRequestDto dto) {
+    @PutMapping("/{userId}")
+    public UserResponseDto updateUserById(@PathVariable Long userId, @RequestBody UserRequestDto dto) {
         return userService.updateUserById(userId, dto);
-}
+    }
 
-    @DeleteMapping
-    public String deleteUser( Long userId) {
+    @DeleteMapping("/{userId}")
+    public String deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
         return "user deleted successfully";
     }

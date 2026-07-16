@@ -2,14 +2,14 @@ package com.expenseTracker.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name = "accounts")
 public class Account {
     @Id
@@ -36,16 +36,4 @@ public class Account {
     @JoinColumn(name = "bank_id", nullable = false)
     private Bank bank;
 
-    // Constructors
-    public Account() {
-    }
-
-    public Account(String accountNumber, String accountType, BigDecimal balance, User user, Bank bank) {
-        this.accountNumber = accountNumber;
-        this.accountType = accountType;
-        this.balance = balance;
-        this.user = user;
-        this.bank = bank;
-        this.createdAt = LocalDateTime.now();
-    }
 }
